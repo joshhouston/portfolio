@@ -1,34 +1,35 @@
 import React, {Component} from 'react';
 import github from './github.png';
 import mail from './mail.png';
+import Projects from '../projects/Projects';
 import {SlideDown} from 'react-slidedown';
 import 'react-slidedown/lib/slidedown.css';
-import Projects from '../projects/Projects';
-import SpotifyWebApi from 'spotify-web-api-js';
+import LastFm from 'lastfm-listener';
 
-const spotifyApi = new SpotifyWebApi();
+
+const options = {
+    api_key: process.env.REACT_APP_MY_KEY,
+    username: 'houstonsspace',
+    rate: 5
+}
+const lastfm = new LastFm(options);
+
 
 class Landing extends Component {
     constructor() {
         super();
-        const params = this.getHashParams();
-        const token = params[Object.keys(params)[0]]
-        if(token) {
-            spotifyApi.setAccessToken(token)
-        }
+        
         this.state = {
             open: true ? true: false,
             openSpotify: true ? true: false,
-            loggedIn: token ? true : false,
             nowPlaying: {
-                name: 'nothing currently...',
+                name: '',
                 image: '',
                 artist: '',
                 albumurl: ''
             }
         }
         
-        // this.getHashParams = this.getHashParams.bind(this)
         this.toggle = this.toggle.bind(this);
         this.toggleSpotify = this.toggleSpotify.bind(this);
     }
@@ -45,30 +46,19 @@ class Landing extends Component {
             this.setState({openSpotify: true})
         }
     }
-    getHashParams() {
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        while ( e = r.exec(q)) {
-           hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
-        return hashParams;
-      }
+    
 
     
     componentDidMount() {
-        spotifyApi.getMyCurrentPlayingTrack()
-        .then((response) => {
-            this.setState({
-                nowPlaying: {
-                    name: response.item.name,
-                    image: response.item.album.images[0].url,
-                    artist: response.item.artists[0].name,
-                    albumurl: response.item.album.external_urls.spotify,
-                    artisturl: response.item.artists[0].external_urls.spotify
-                }
-            })
+        lastfm.getLatestSong(song => {
+            this.setState({nowPlaying: {
+                name: song.name,
+                artist: song.artist['#text'],
+                image: song.image[2]['#text'],
+                albumurl: song.url
+            }})
         })
+        
     }
 
     render() {
@@ -106,7 +96,7 @@ class Landing extends Component {
                                     </a>
                                     <div className="spotify-artist">
                                         <p>title: {this.state.nowPlaying.name}</p>
-                                        <a href={this.state.nowPlaying.artisturl} target="_blank" rel="noopener noreferrer">
+                                        <a href={this.state.nowPlaying.albumurl} target="_blank" rel="noopener noreferrer">
                                             
                                             <p>by: <span className='actions' >{this.state.nowPlaying.artist}</span></p>
                                         </a>
