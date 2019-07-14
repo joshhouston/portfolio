@@ -22,6 +22,8 @@ class Landing extends Component {
         this.state = {
             open: true ? true: false,
             openSpotify: true ? true: false,
+            openSkills: true ? true: false,
+            openAbout: true ? true: false,
             nowPlaying: {
                 name: '',
                 image: '',
@@ -32,6 +34,8 @@ class Landing extends Component {
         
         this.toggle = this.toggle.bind(this);
         this.toggleSpotify = this.toggleSpotify.bind(this);
+        this.toggleSkills = this.toggleSkills.bind(this);
+        this.toggleAbout = this.toggleAbout.bind(this)
     }
 
     toggle() {
@@ -46,8 +50,19 @@ class Landing extends Component {
             this.setState({openSpotify: true})
         }
     }
-    
+    toggleSkills() {
+        this.setState({openSkills: false})
+        if(this.state.openSkills === false) {
+            this.setState({openSkills: true})
+        }
+    }
 
+    toggleAbout() {
+        this.setState({openAbout: false})
+        if(this.state.openAbout === false) {
+            this.setState({openAbout: true})
+        }
+    }
     
     componentDidMount() {
         lastfm.getLatestSong(song => {
@@ -70,6 +85,8 @@ class Landing extends Component {
                         <p>A full-stack developer that-</p>
                     </div>
                     <div className="main">
+
+                        {/* PROJECTS */}
                         <div className="stuff">
                             <p onClick={this.toggle}  ><span className='carrot'>></span>    has some <span className='actions'>projects</span></p>
                             <SlideDown 
@@ -78,13 +95,38 @@ class Landing extends Component {
                                 <Projects />
                             </SlideDown>
                         </div>
+                        
+                        {/* TOOLS */}
                         <div className="stuff">
-                            <p><span className='carrot'>></span>     works with <span className='actions'>skills</span></p>
-
+                            <p onClick={this.toggleSkills} ><span className='carrot'>></span>     likes to  <span className='actions'>use these tools</span></p>
+                            <SlideDown 
+                                closed={this.state.openSkills}
+                                className={'my-dropdown-slidedown'}>
+                                <div className="skills">
+                                    <i className="devicon-html5-plain-wordmark colored"></i>
+                                    <i className="devicon-css3-plain-wordmark colored"></i>
+                                    <i className="devicon-sass-original colored"></i>
+                                    <i className="devicon-javascript-plain colored"></i>
+                                    <i className="devicon-react-original-wordmark colored"></i>
+                                    <i className="devicon-nodejs-plain colored"></i>
+                                    <i className="devicon-postgresql-plain-wordmark colored"></i>
+                                </div>
+                            </SlideDown>
                         </div>
+                        
+                        {/* ABOUT */}
                         <div className="stuff">
-                            <p><span className='carrot'>></span>     is definitely  <span className='actions'>not a robot</span></p>
+                            <p onClick={this.toggleAbout} ><span className='carrot'>></span>     is definitely  <span className='actions'>not a robot</span></p>
+                            <SlideDown 
+                                closed={this.state.openAbout}
+                                className={'my-dropdown-slidedown'}>
+                                <div className="about">
+                                    <p>Hello! I'm a full stack developer that specializes in <span className="actions">React JS</span>. I love creating beautiful & modern web applications. When I'm not coding, I enjoy creating music, gaming, and <span className="actions">ping pong</span>. </p>
+                                </div>
+                            </SlideDown>
                         </div>
+                        
+                        {/* LAST PLAYED/URRENTLY PLAYING */}
                         <div className="stuff">
                             <p  onClick={this.toggleSpotify}><span className='carrot'>></span>     is currently listening to <span className='actions'>{this.state.nowPlaying.name}</span></p>
                             <SlideDown

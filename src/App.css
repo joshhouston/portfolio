@@ -114,10 +114,39 @@ body {
   width: 50vw;
 }
 
+.skills {
+  margin-left: 1.5em;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+i {
+  font-size: 3em;
+}
+
+.about {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 15vh;
+}
+
+.about p {
+  line-height: 1.8rem;
+}
+
+
+
 .spotify-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  
+}
+
+.spotify-info img {
+  margin-right: 3em;
 }
 
 .spotify-info a {
@@ -129,6 +158,13 @@ body {
   height: 80px;
   width: 80px;
 }
+
+@media(max-width: 961px){
+  .about {
+    height: 30vh;
+  }
+}
+
 @media(max-width: 814px){
   .landing-stuff {
     width: 60vw
@@ -145,5 +181,11 @@ body {
 @media(max-width: 501px){
   .landing-stuff {
     width: 70vw;
+  }
+}
+
+@media(max-width: 448px){
+  .about {
+    height: 40vh;
   }
 }
