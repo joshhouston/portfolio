@@ -3,8 +3,8 @@ import github from './github.png';
 import mail from './mail.png';
 import Projects from '../projects/Projects';
 import {SlideDown} from 'react-slidedown';
-import 'react-slidedown/lib/slidedown.css';
 import LastFm from 'lastfm-listener';
+import 'react-slidedown/lib/slidedown.css';
 
 
 const options = {
@@ -24,6 +24,7 @@ class Landing extends Component {
             openSpotify: true ? true: false,
             openSkills: true ? true: false,
             openAbout: true ? true: false,
+            test: '',
             nowPlaying: {
                 name: '',
                 image: '',
@@ -63,7 +64,7 @@ class Landing extends Component {
             this.setState({openAbout: true})
         }
     }
-    
+
     componentDidMount() {
         lastfm.getLatestSong(song => {
             this.setState({nowPlaying: {
@@ -71,9 +72,25 @@ class Landing extends Component {
                 artist: song.artist['#text'],
                 image: song.image[2]['#text'],
                 albumurl: song.url
-            }})
+            },
+            test: song.name
         })
-        
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.nowPlaying !== prevState.nowPlaying){
+            lastfm.getLatestSong(song => {
+                this.setState({nowPlaying: {
+                    name: song.name,
+                    artist: song.artist['#text'],
+                    image: song.image[2]['#text'],
+                    albumurl: song.url
+                },
+                test: song.name
+            })
+            })
+        }
     }
 
     render() {
@@ -148,7 +165,7 @@ class Landing extends Component {
                         </div>
                     </div>
                     <div className="resume">
-                        <p>Check out my <a href="http://github.com/joshhouston" target="_blank" rel="noopener noreferrer">Resume</a></p>
+                        <p>Check out my <a href="http://github.com/joshhouston" target="_blank" rel="noopener noreferrer">Resume</a> or <a href="https://www.linkedin.com/in/houstonjoshua/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
                     </div>
                     <div className="buttons">
                         <a href="http://github.com/joshhouston" target="_blank" rel="noopener noreferrer" className='github' > <img className='github-icon' src={github} alt=""/> Github</a>
