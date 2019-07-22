@@ -1,3 +1,5 @@
+
+
 body {
   background-color:  	#fffafa;
 }
@@ -47,6 +49,11 @@ body {
   justify-content: left;
 }
 
+.stuff {
+  text-decoration: none;
+}
+
+
 .stuff p:hover  {
   cursor: pointer;
 }
@@ -66,6 +73,11 @@ body {
 .resume a {
   color: #FF2353;
   text-decoration: none;
+}
+
+.resume a:hover {
+  border-bottom: 2px solid #FF2353;
+  transition: linear 1s;
 }
 
 .buttons {
@@ -108,9 +120,11 @@ body {
   margin-right: 0.5em;
 }
 
-.projects {
-  height: 40vh;
-  width: 50vw;
+
+
+.project-row {
+  display: flex;
+  flex-direction: row;
 }
 
 .skills {
@@ -159,6 +173,83 @@ i {
   width: 80px;
 }
 
+.slider {
+  height: 90%;
+}
+
+.image {
+  width: 40vw;
+}
+
+.projects {
+  height: 30vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 10vh;
+  flex-wrap: wrap;
+}
+
+.projects h2 {
+  font-family: 'Merriweather', serif;
+}
+
+.projects p {
+  font-family: 'Fira Mono', monospace;
+}
+
+.my-projects {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 50%;
+  width: 30%;
+}
+
+.project-info h2 {
+  font-size: 1rem;
+}
+
+.project-info p {
+  font-size: 0.75rem;
+}
+
+.project-pic {
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
+  height: auto;
+}
+
+.back img {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.back {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  align-items: center;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #FF2353;
+}
+
+
 @media(max-width: 961px){
   .about {
     height: 30vh;
@@ -168,6 +259,24 @@ i {
 @media(max-width: 814px){
   .landing-stuff {
     width: 60vw
+  }
+}
+
+@media(max-width: 770px){
+  .projects {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  .project-info {
+    width: 85%;
+  }
+}
+
+@media(max-width: 729px) {
+  .image {
+    width: 50vw;
   }
 }
 
@@ -181,6 +290,12 @@ i {
 @media(max-width: 501px){
   .landing-stuff {
     width: 70vw;
+  }
+}
+
+@media(max-width: 479px){
+  .image {
+    width: 75vw;
   }
 }
 

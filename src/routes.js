@@ -5,7 +5,7 @@ import Projects from './components/projects/Projects';
 
 export default (
     <Switch>
-        <Route path='/' component={Landing}/>
+        <Route exact path='/' component={Landing}/>
         <Route path='/projects' component={Projects} />
     </Switch>
 )
