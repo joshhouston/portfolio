@@ -57,7 +57,7 @@ class Projects extends Component {
                                     </div>
                                     <div className="buttons">
                                         <a href="https://github.com/instaplan/instaplan" target="_blank" rel="noopener noreferrer" className='github' > Github</a>
-                                        <a href='https://github.com/instaplan/instaplan' target="_blank" rel="noopener noreferrer" className='mail'> Live Site</a>
+                                        <a href='http://instaplan.xyz/' target="_blank" rel="noopener noreferrer" className='mail'> Live Site</a>
                                     </div>
                                 </div>
                             </div>
