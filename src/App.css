@@ -2,6 +2,8 @@
 
 body {
   background-color:  	#fffafa;
+  margin: 0;
+  padding: 0;
 }
 .landing {
   height: 100vh;
@@ -181,6 +183,37 @@ i {
   width: 40vw;
 }
 
+.me-projects {
+  margin-top: 1em;
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.projectz {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.align {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-display {
+  width: 80%;
+  height: 100%;
+}
+
+.stuffs {
+  width: 77%;
+  display: flex;
+}
+
+/* OLD CODE */
 .projects {
   height: 30vh;
   width: 100vw;
@@ -241,6 +274,7 @@ i {
   display: flex;
   flex-direction: row;
   width: 80px;
+  height: 30px;
   align-items: center;
 }
 

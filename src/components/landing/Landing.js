@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import github from './github.png';
 import mail from './mail.png';
 import myresume from './resume.pdf'
-import Projects from '../projects/Projects';
 import {SlideDown} from 'react-slidedown';
 import Nowplaying from '../nowplaying/Nowplaying';
 import 'react-slidedown/lib/slidedown.css';
 import {Link} from 'react-router-dom'
-import Slide from 'react-reveal/Slide';
+// import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
 
 
 class Landing extends Component {
@@ -53,7 +53,7 @@ class Landing extends Component {
     render() {
         return (
             <div className='landing' >
-                <Slide left>
+                <Fade cascade>
                 <div className="landing-stuff">
                     <div className="header">
                         <h1>Hello, I'm Josh</h1>
@@ -109,7 +109,7 @@ class Landing extends Component {
                         <a href='mailto:jjoshhouston@gmail.com' className='mail'> <img src="" alt=""/> <img className='github-icon' src={mail} alt=""/> Contact</a>
                     </div>
                 </div>
-                </Slide>
+                </Fade>
             </div>
         )
     }
