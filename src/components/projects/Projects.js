@@ -48,7 +48,9 @@ class Projects extends Component {
                             </div>
                             <div>
                                 <div className="projectz">
-                                    <img className='project-pic' src={group2} alt="" />
+                                <div className="projectz-pic">
+                                        <img className='project-pic' src={group2} alt="" />
+                                    </div>
                                     <div className="align">
                                         <h2>instaPlan</h2>
                                         <p> A group project to make finding current events near you simple and easy. Combined multiple API’s (EventBrite, Google Maps) to ensure a consistent user experience. Implemented Redux for state management throughout the application.Integrated Redux to hold and manage state. Wrote unit and end-to-end tests to run quality assurance on the entire application.</p>

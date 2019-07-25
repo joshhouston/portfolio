@@ -32,7 +32,6 @@ class Nowplaying extends Component {
         axios
             .post(`https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
             .then(response => {
-                console.log(response.data.recenttracks.track[0].artist['#text'])
                 const trackname = response.data.recenttracks.track[0].name
                 const image = response.data.recenttracks.track[0].image[2]['#text']
                 const artist = response.data.recenttracks.track[0].artist['#text']
