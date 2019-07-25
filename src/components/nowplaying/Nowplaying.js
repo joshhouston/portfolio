@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import LastFm from 'lastfm-listener';
 import { SlideDown } from 'react-slidedown';
 import Flip from 'react-reveal/Flip';
 import axios from 'axios';
 
 
-
-const options = {
-    api_key: process.env.REACT_APP_MY_KEY,
-    username: 'houstonsspace',
-    rate: 5
-}
-const lastfm = new LastFm(options);
 
 class Nowplaying extends Component {
     constructor() {
