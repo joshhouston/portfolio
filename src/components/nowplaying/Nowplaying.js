@@ -54,7 +54,7 @@ class Nowplaying extends Component {
         if (this.state.nowPlaying !== prevState.nowPlaying) {
             setTimeout(() => {
                 axios
-                .post(`http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
+                .post(`https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
                 .then(response => {
                     console.log(response.data.recenttracks.track[0].artist['#text'])
                     const trackname = response.data.recenttracks.track[0].name
