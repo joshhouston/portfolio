@@ -198,6 +198,10 @@ i {
   flex-wrap: wrap;
 }
 
+.projectz-pic {
+  max-width: 500px;
+}
+
 .align {
   display: flex;
   flex-direction: column;

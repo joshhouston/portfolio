@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import LastFm from 'lastfm-listener';
-import {SlideDown} from 'react-slidedown';
+import { SlideDown } from 'react-slidedown';
 import Flip from 'react-reveal/Flip';
+import axios from 'axios';
 
 
 
@@ -13,10 +14,10 @@ const options = {
 const lastfm = new LastFm(options);
 
 class Nowplaying extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            openSpotify: true ? true: false,
+            openSpotify: true ? true : false,
             nowPlaying: {
                 name: '',
                 image: '',
@@ -29,68 +30,75 @@ class Nowplaying extends Component {
     }
 
     toggleSpotify() {
-        this.setState({openSpotify: false})
-        if(this.state.openSpotify === false) {
-            this.setState({openSpotify: true})
+        this.setState({ openSpotify: false })
+        if (this.state.openSpotify === false) {
+            this.setState({ openSpotify: true })
         }
     }
 
     componentDidMount() {
-        lastfm.getLatestSong(song => {
-            this.setState({nowPlaying: {
-                name: song.name,
-                artist: song.artist['#text'],
-                image: song.image[2]['#text'],
-                albumurl: song.url
-            },
-            test: song.name
-        })
-        })
-    }
+        axios
+            .post(`http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
+            .then(response => {
+                console.log(response.data.recenttracks.track[0].artist['#text'])
+                const trackname = response.data.recenttracks.track[0].name
+                const image = response.data.recenttracks.track[0].image[2]['#text']
+                const artist = response.data.recenttracks.track[0].artist['#text']
+                const albumurl = response.data.recenttracks.track[0].url
 
-    componentDidUpdate(prevProps, prevState){
-        if(this.state.nowPlaying !== prevState.nowPlaying){
-            setTimeout( () => {
-                lastfm.getLatestSong(song => {
-                this.setState({nowPlaying: {
-                    name: song.name,
-                    artist: song.artist['#text'],
-                    image: song.image[2]['#text'],
-                    albumurl: song.url
-                },
-                test: song.name
+                this.setState({
+                    nowPlaying: {
+                        name: trackname,
+                        image: image,
+                        artist: artist,
+                        albumurl: albumurl
+                    }
                 })
             })
-            }, 4000)
-            // lastfm.getLatestSong(song => {
-            //     this.setState({nowPlaying: {
-            //         name: song.name,
-            //         artist: song.artist['#text'],
-            //         image: song.image[2]['#text'],
-            //         albumurl: song.url
-            //     },
-            //     test: song.name
-            // })
-            // lastfm.stop()
-            // })
-            
+
+        
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.nowPlaying !== prevState.nowPlaying) {
+            setTimeout(() => {
+                axios
+                .post(`http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
+                .then(response => {
+                    console.log(response.data.recenttracks.track[0].artist['#text'])
+                    const trackname = response.data.recenttracks.track[0].name
+                    const image = response.data.recenttracks.track[0].image[2]['#text']
+                    const artist = response.data.recenttracks.track[0].artist['#text']
+                    const albumurl = response.data.recenttracks.track[0].url
+    
+                    this.setState({
+                        nowPlaying: {
+                            name: trackname,
+                            image: image,
+                            artist: artist,
+                            albumurl: albumurl
+                        }
+                    })
+                })
+            })
+
         } 
     }
-    render(){
+    render() {
         return (
             <div className="stuff">
-                <p  onClick={this.toggleSpotify}><span className='carrot'>></span>     is currently listening to <Flip bottom cascade><span className='actions'>{this.state.nowPlaying.name}</span></Flip></p>
+                <p onClick={this.toggleSpotify}><span className='carrot'>></span>     is currently listening to <Flip bottom cascade><span className='actions'>{this.state.nowPlaying.name}</span></Flip></p>
                 <SlideDown
                     closed={this.state.openSpotify}
                 >
                     <div className='spotify-info'>
                         <a href={this.state.nowPlaying.albumurl} target="_blank" rel="noopener noreferrer">
-                            <img className='albumArt' src={this.state.nowPlaying.image} alt=""/>
+                            <img className='albumArt' src={this.state.nowPlaying.image} alt="" />
                         </a>
                         <div className="spotify-artist">
                             <p>title: {this.state.nowPlaying.name}</p>
                             <a href={this.state.nowPlaying.albumurl} target="_blank" rel="noopener noreferrer">
-                                
+
                                 <p>by: <span className='actions' >{this.state.nowPlaying.artist}</span></p>
                             </a>
                         </div>

@@ -33,7 +33,9 @@ class Projects extends Component {
                         <Slider {...settings}>
                             <div>
                                 <div className="projectz">
-                                    <img className='project-pic' src={pic1} alt="" />
+                                    <div className="projectz-pic">
+                                        <img className='project-pic' src={pic1} alt="" />
+                                    </div>
                                     <div className="align">
                                         <h2>UI Wars</h2>
                                         <p>A website where developers of all skill levels can come to practice their UI skills and compare them to other developers. Utilization of Chart.js for real time data display of how many users completed the specific challenge and which tools were used.</p>
