@@ -42,7 +42,7 @@ class Projects extends Component {
                                     </div>
                                     <div className="buttons">
                                         <a href="https://github.com/joshhouston/ui-wars" target="_blank" rel="noopener noreferrer" className='github' > Github</a>
-                                        <a href='http://157.230.139.191:5060/#/' target="_blank" rel="noopener noreferrer" className='mail'> Live Site</a>
+                                        <a href='http://157.230.139.191:5070/#/' target="_blank" rel="noopener noreferrer" className='mail'> Live Site</a>
                                     </div>
                                 </div>
                             </div>
