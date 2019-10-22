@@ -70,7 +70,7 @@ class Nowplaying extends Component {
                         }
                     })
                 })
-            }, 5000)
+            }, 2000)
 
         } 
     }
