@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import pic1 from './uiwars1.PNG'
 import group2 from './group2.png'
+import colorspot from './colorspot.PNG'
 import Slide from 'react-reveal/Slide';
 import back from './back.png';
 import { Link } from 'react-router-dom';
@@ -34,6 +35,21 @@ class Projects extends Component {
                             <div>
                                 <div className="projectz">
                                     <div className="projectz-pic">
+                                        <img className='project-pic' src={colorspot} alt="" />
+                                    </div>
+                                    <div className="align">
+                                        <h2>Color Spot</h2>
+                                        <p> A unique Spotify player that will color the application based on what the user is currently listening to in real time.</p>
+                                    </div>
+                                    <div className="buttons">
+                                        <a href="https://github.com/joshhouston/ifyspot" target="_blank" rel="noopener noreferrer" className='github' > Github</a>
+                                        <a href='https://colorspot.art/' target="_blank" rel="noopener noreferrer" className='mail'> Live Site</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="projectz">
+                                    <div className="projectz-pic">
                                         <img className='project-pic' src={pic1} alt="" />
                                     </div>
                                     <div className="align">
@@ -48,7 +64,7 @@ class Projects extends Component {
                             </div>
                             <div>
                                 <div className="projectz">
-                                <div className="projectz-pic">
+                                    <div className="projectz-pic">
                                         <img className='project-pic' src={group2} alt="" />
                                     </div>
                                     <div className="align">
@@ -66,36 +82,6 @@ class Projects extends Component {
                     </div>
                 </div>
             </Slide>
-
-            // <div className="projects" >
-            //     <Slide right>
-            //         <div className="image">
-            //             <Link to='/' style={{ color: '#1C1C1C', textDecoration: 'none' }} >
-            //                 <div className="back">
-            //                     <img src={back} alt="" />
-            //                     <p>back</p>
-            //                 </div>
-            //             </Link>
-            //         </div>
-            //         <div className="project-info">
-            //             <img className='project-pic' src={pic1} alt="" />
-            // <h2>UI Wars</h2>
-            // <p>A website where developers of all skill levels can come to practice their UI skills and compare them to other developers. Utilization of Chart.js for real time data display of how many users completed the specific challenge and which tools were used.</p>
-            // <div className="buttons">
-            //     <a href="https://github.com/joshhouston/ui-wars" target="_blank" rel="noopener noreferrer" className='github' > Github</a>
-            //     <a href='' className='mail'> Live Site</a>
-            // </div>
-            //         </div>
-            //         <div className="project-info">
-            //             <h2>UI Wars</h2>
-            //             <p>A website where developers of all skill levels can come to practice their UI skills and compare them to other developers. Utilization of Chart.js for real time data display of how many users completed the specific challenge and which tools were used.</p>
-            //             <div className="buttons">
-            //                 <a href="https://github.com/joshhouston/ui-wars" target="_blank" rel="noopener noreferrer" className='github' > Github</a>
-            //                 <a href='' className='mail'> Live Site</a>
-            //             </div>
-            //         </div>
-            //     </Slide>
-            // </div>
         )
     }
 }
