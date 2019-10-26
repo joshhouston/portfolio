@@ -6,6 +6,8 @@ import Slide from 'react-reveal/Slide';
 import back from './back.png';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import colorgif from './colorgif.gif';
+
 var settings = {
     dots: true,
     infinite: true,
@@ -35,7 +37,7 @@ class Projects extends Component {
                             <div>
                                 <div className="projectz">
                                     <div className="projectz-pic">
-                                        <img className='project-pic' src={colorspot} alt="" />
+                                        <img className='project-pic' src={colorgif} alt="" />
                                     </div>
                                     <div className="align">
                                         <h2>Color Spot</h2>
