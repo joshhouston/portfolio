@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import pic1 from './uiwars1.PNG'
 import group2 from './group2.png'
-import colorspot from './colorspot.PNG'
 import Slide from 'react-reveal/Slide';
 import back from './back.png';
 import { Link } from 'react-router-dom';
