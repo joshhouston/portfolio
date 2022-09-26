@@ -1,102 +1,53 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SlideDown } from 'react-slidedown';
-import Flip from 'react-reveal/Flip';
+import Fade from 'react-reveal';
 import axios from 'axios';
 
 
+function Nowplaying() {
 
-class Nowplaying extends Component {
-    constructor() {
-        super();
-        this.state = {
-            openSpotify: true ? true : false,
-            nowPlaying: {
-                name: '',
-                image: '',
-                artist: '',
-                albumurl: ''
-            }
-        }
-        this.toggleSpotify = this.toggleSpotify.bind(this);
+    const [openMedia, setOpenMedia] = useState(true);
+    const [nowPlayingTitle, setNowPlayingTitle] = useState([]);
+    const [artist, setArtist] = useState([]);
+    const [albumArt, setAlbumArt] = useState([]);
+    const [musicURL, setMusicURL] = useState([]);
 
-    }
-
-    toggleSpotify() {
-        this.setState({ openSpotify: false })
-        if (this.state.openSpotify === false) {
-            this.setState({ openSpotify: true })
-        }
-    }
-
-    componentDidMount() {
-        axios
-            .post(`https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
-            .then(response => {
-                const trackname = response.data.recenttracks.track[0].name
-                const image = response.data.recenttracks.track[0].image[2]['#text']
-                const artist = response.data.recenttracks.track[0].artist['#text']
-                const albumurl = response.data.recenttracks.track[0].url
-
-                this.setState({
-                    nowPlaying: {
-                        name: trackname,
-                        image: image,
-                        artist: artist,
-                        albumurl: albumurl
-                    }
-                })
+    const getNowPlaying = async () => {
+        await axios.get(`https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
+            .then((res) => {
+                setNowPlayingTitle(res.data.recenttracks.track[0].name);
+                setArtist(res.data.recenttracks.track[0].artist['#text']);
+                setAlbumArt(res.data.recenttracks.track[0].image[2]['#text']);
+                setMusicURL(res.data.recenttracks.track[0].url);
             })
-
-        
+            .catch((error) => { })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.nowPlaying !== prevState.nowPlaying) {
-            setTimeout(() => {
-                axios
-                .post(`https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=houstonsspace&api_key=${process.env.REACT_APP_MY_KEY}&format=json`)
-                .then(response => {
-                    const trackname = response.data.recenttracks.track[0].name
-                    const image = response.data.recenttracks.track[0].image[2]['#text']
-                    const artist = response.data.recenttracks.track[0].artist['#text']
-                    const albumurl = response.data.recenttracks.track[0].url
-    
-                    this.setState({
-                        nowPlaying: {
-                            name: trackname,
-                            image: image,
-                            artist: artist,
-                            albumurl: albumurl
-                        }
-                    })
-                })
-            }, 5000)
+    useEffect(() => {
+        const timer = setInterval(getNowPlaying, 2000);
+        return () => clearInterval(timer)
+    }, [])
 
-        } 
-    }
-    render() {
-        return (
-            <div className="stuff">
-                <p onClick={this.toggleSpotify}><span className='carrot'>></span>     is currently listening to <Flip bottom cascade><span className='actions'>{this.state.nowPlaying.name}</span></Flip></p>
-                <SlideDown
-                    closed={this.state.openSpotify}
-                >
-                    <div className='spotify-info'>
-                        <a href={this.state.nowPlaying.albumurl} target="_blank" rel="noopener noreferrer">
-                            <img className='albumArt' src={this.state.nowPlaying.image} alt="" />
+
+    return (
+        <div className="stuff">
+            <p onClick={() => setOpenMedia(!openMedia)}><span className='carrot'>></span>     is currently listening to <Fade cascade><span className='actions'>{nowPlayingTitle}</span></Fade></p>
+            <SlideDown closed={openMedia}>
+                <div className='spotify-info'>
+                    <a href={musicURL} target="_blank" rel="noopener noreferrer">
+                        <img className='albumArt' src={albumArt} alt="" />
+                    </a>
+                    <div className="spotify-artist">
+                        <p>title: {nowPlayingTitle}</p>
+                        <a href={musicURL} target="_blank" rel="noopener noreferrer">
+
+                            <p>by: <span className='actions' >{artist}</span></p>
                         </a>
-                        <div className="spotify-artist">
-                            <p>title: {this.state.nowPlaying.name}</p>
-                            <a href={this.state.nowPlaying.albumurl} target="_blank" rel="noopener noreferrer">
-
-                                <p>by: <span className='actions' >{this.state.nowPlaying.artist}</span></p>
-                            </a>
-                        </div>
                     </div>
-                </SlideDown>
-            </div>
-        )
-    }
+                </div>
+            </SlideDown>
+        </div>
+    )
 }
 
-export default Nowplaying
+export default Nowplaying;
